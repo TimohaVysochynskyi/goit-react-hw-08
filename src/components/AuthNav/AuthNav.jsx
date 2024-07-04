@@ -1,5 +1,5 @@
-import css from "./AuthNav.module.css";
 import { NavLink } from "react-router-dom";
+import css from "./AuthNav.module.css";
 
 export default function AuthNav() {
   return (
@@ -11,7 +11,7 @@ export default function AuthNav() {
           </NavLink>
         </li>
         <li className={css.item}>
-          <NavLink to="/login" class={css.link}>
+          <NavLink to="/login" className={css.link}>
             Login
           </NavLink>
         </li>

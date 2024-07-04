@@ -1,0 +1,12 @@
+.list {
+    display: flex;
+    align-items: center;
+    gap: 0 30px;
+    list-style: none;
+}
+
+.link {
+    font-size: 18px;
+    text-decoration: none;
+    color: #000;
+}

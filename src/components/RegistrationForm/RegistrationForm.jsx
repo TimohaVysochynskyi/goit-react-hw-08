@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { signUp } from "../../redux/auth/operations";
 import * as Yup from "yup";
 import { useId } from "react";
+import toast, { Toaster } from "react-hot-toast";
 import Button from "../Button/Button";
 import css from "./RegistrationForm.module.css";
 
@@ -32,13 +33,30 @@ export default function RegistrationForm() {
         email: values.email,
         password: values.password,
       })
-    );
+    )
+      .unwrap()
+      .catch(() => {
+        toast.error("Unknown error", {
+          style: {
+            background: "#181818",
+            color: "#fff",
+          },
+        });
+      });
     actions.resetForm();
   };
 
   return (
     <>
       <div className={css.container}>
+        <Toaster
+          containerStyle={{
+            position: "relative",
+          }}
+          position="top-right"
+          reverseOrder={false}
+        />
+
         <Formik
           initialValues={{
             name: "",

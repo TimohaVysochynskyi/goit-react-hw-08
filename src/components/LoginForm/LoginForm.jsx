@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { logIn } from "../../redux/auth/operations";
 import * as Yup from "yup";
 import { useId } from "react";
+import toast, { Toaster } from "react-hot-toast";
 import Button from "../Button/Button";
 import css from "./LoginForm.module.css";
 
@@ -19,13 +20,30 @@ export default function LoginForm() {
   const dispatch = useDispatch();
 
   const handleSubmit = (values, actions) => {
-    dispatch(logIn({ email: values.email, password: values.password }));
+    dispatch(logIn({ email: values.email, password: values.password }))
+      .unwrap()
+      .catch(() => {
+        toast.error("Unknown error", {
+          style: {
+            background: "#181818",
+            color: "#fff",
+          },
+        });
+      });
     actions.resetForm();
   };
 
   return (
     <>
       <div className={css.container}>
+        <Toaster
+          containerStyle={{
+            position: "relative",
+          }}
+          position="top-right"
+          reverseOrder={false}
+        />
+
         <Formik
           initialValues={{
             email: "",
